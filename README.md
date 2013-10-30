@@ -2,7 +2,9 @@
 
 > {{paginate}} handlebars helper for Assemble.
 
-See [live examples →](http://assemble.github.io/example-pagination/)
+#### See [live examples →](http://assemble.github.io/example-pagination/)
+
+![image](https://f.cloud.github.com/assets/383994/1436000/b8fd1968-414c-11e3-9019-90e3106ead76.png)
 
 
 ## Quickstart
@@ -55,9 +57,6 @@ Results in:
   </li>
 </ul>
 ```
-Example:
-
-![image](https://f.cloud.github.com/assets/383994/1436000/b8fd1968-414c-11e3-9019-90e3106ead76.png)
 
 See [live examples](http://assemble.github.io/example-pagination/).
 
