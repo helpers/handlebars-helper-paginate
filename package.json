@@ -1,5 +1,5 @@
 {
-  "name": "helper-paginate",
+  "name": "handlebars-helper-paginate",
   "description": "{{paginate}} handlebars helper, for adding pagination to Assemble, the static site generator for Node.js, Grunt.js and Yeoman.",
   "version": "0.1.0",
   "homepage": "https://github.com/helpers/handlebars-helper-paginate",
