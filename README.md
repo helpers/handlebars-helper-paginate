@@ -62,7 +62,17 @@ See [live examples](http://assemble.github.io/example-pagination/).
 
 ## Options
 
-Coming soon... I plan to make this helper more customizable, please [create an issue](https://github.com/helpers/handlebars-helper-paginate/issues/new) to report bugs or to make a feature request.
+### modifier
+Type: `String`
+Default: `undefined`
+
+Allows defining a modifier class for the pager.
+
+```handlebars
+{{paginate pagination modifier="pager-justified"}}
+```
+
+Please [create an issue](https://github.com/helpers/handlebars-helper-paginate/issues/new) to report bugs or to make a feature request.
 
 
 ## Author

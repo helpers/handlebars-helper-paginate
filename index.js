@@ -11,7 +11,7 @@ var path = require('path');
 var fs = require('fs');
 
 // node_modules
-var _     = require('lodash');
+var _ = require('lodash');
 
 // Export helpers
 module.exports.register = function (Handlebars, options, params) {
@@ -25,11 +25,18 @@ module.exports.register = function (Handlebars, options, params) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pager, HTML.
    */
-  Handlebars.registerHelper('paginate', function(context, modifier, options) {
+  exports.paginate = function(context, options) {
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, opts, this, options.hash);
+
+    context = _.extend({
+      modifier: '',
+      first: '&larr; Home'
+    }, context, opts.data, this, options.hash);
+
+    var dest = path.join(context.dirname, '../index.html');
+    var first = context.first;
 
     var template = [
       '<ul class="pager {{modifier}}">',
@@ -38,7 +45,7 @@ module.exports.register = function (Handlebars, options, params) {
       // '  {{/is}}',
       '  {{#is pagination.currentPage 1}}',
       '    <li class="previous">',
-      '      <a href="{{relative page.dest "./_gh_pages/index.html"}}">&larr; Home</a>',
+      '      <a href="{{relative page.dest "' + dest + '"}}">' + first + '</a>',
       '    </li>',
       '  {{/is}}',
       '  {{#isnt pagination.currentPage 1}}',
@@ -67,6 +74,11 @@ module.exports.register = function (Handlebars, options, params) {
     ].join('\n');
 
     return new Handlebars.SafeString(Handlebars.compile(template)(context));
-  });
+  };
 
+  for (var helper in exports) {
+    if (exports.hasOwnProperty(helper)) {
+      Handlebars.registerHelper(helper, exports[helper]);
+    }
+  }
 };
