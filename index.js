@@ -10,13 +10,11 @@
 var path = require('path');
 var fs = require('fs');
 
-// node_modules
-var _ = require('lodash');
-
 // Export helpers
 module.exports.register = function (Handlebars, options, params) {
 
   var opts = options || {};
+  var _ = params.grunt.util._;
 
   /**
    * {{paginate}}
@@ -29,28 +27,18 @@ module.exports.register = function (Handlebars, options, params) {
 
     options = options || {};
     options.hash = options.hash || {};
-
-    context = _.extend({
-      modifier: '',
-      first: '&larr; Home'
-    }, context, opts.data, this, options.hash);
-
-    var dest = path.join(context.dirname, '../index.html');
-    var first = context.first;
+    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
 
     var template = [
       '<ul class="pager {{modifier}}">',
-      // '  {{#is pagination.currentPage 1}}',
-      // '    <li class="pager-heading">POPULAR</li>',
-      // '  {{/is}}',
       '  {{#is pagination.currentPage 1}}',
-      '    <li class="previous">',
-      '      <a href="{{relative page.dest "' + dest + '"}}">' + first + '</a>',
+      '    <li class="previous disabled">',
+      '      <a href="{{relative page.dest prev.dest}}">&larr; Prev</a>',
       '    </li>',
       '  {{/is}}',
       '  {{#isnt pagination.currentPage 1}}',
       '    <li class="previous">',
-      '      <a href="{{relative page.dest prev.dest}}">&larr; Previous</a>',
+      '      <a href="{{relative page.dest prev.dest}}">&larr; Prev</a>',
       '    </li>',
       '  {{/isnt}}',
       '',
@@ -72,7 +60,6 @@ module.exports.register = function (Handlebars, options, params) {
       '  {{/is}}',
       '</ul>'
     ].join('\n');
-
     return new Handlebars.SafeString(Handlebars.compile(template)(context));
   };
 
