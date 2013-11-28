@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helper-paginate",
   "description": "{{paginate}} handlebars helper, for adding pagination to Assemble, the static site generator for Node.js, Grunt.js and Yeoman.",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "homepage": "https://github.com/helpers/handlebars-helper-paginate",
   "author": {
     "name": "Jon Schlinkert",
@@ -21,6 +21,9 @@
     }
   ],
   "main": "./index.js",
+  "dependencies": {
+    "lodash": "~2.4.0"
+  },
   "peerDependencies": {
     "handlebars-helper-eachitems": "~0.1.2"
   },
