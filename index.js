@@ -10,13 +10,11 @@
 var path = require('path');
 var fs = require('fs');
 
+var _ = require('lodash');
 
 // Export helpers
-module.exports.register = function (Handlebars, options, params) {
-
-  var opts = options || {};
-  var _ = require('lodash');
-
+module.exports = function (config) {
+  var helpers = {};
 
   /**
    * {{pager}}
@@ -25,10 +23,12 @@ module.exports.register = function (Handlebars, options, params) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pager, HTML.
    */
-  exports.pager = function(context, options) {
+  helpers.pager = function(context, options) {
+    var ctx = config.context();
+
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
 
     var template = [
       '<ul class="nav nav-pills nav-stacked">',
@@ -100,10 +100,12 @@ module.exports.register = function (Handlebars, options, params) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pager, HTML.
    */
-  exports.paginate = function(context, options) {
+  helpers.paginate = function(context, options) {
+    var ctx = config.context();
+
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
 
     var template = [
       '<ul class="pager{{#if modifier}} {{modifier}}{{/if}}">',
@@ -163,10 +165,12 @@ module.exports.register = function (Handlebars, options, params) {
    * @param  {Object} options Pass a modifier class to the helper.
    * @return {String}         The pagination, HTML.
    */
-  exports.pagination = function(context, options) {
+  helpers.pagination = function(context, options) {
+    var ctx = config.context();
+
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, opts.data, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
 
     var template = [
       '<ul class="pagination{{#if modifier}} {{modifier}}{{/if}}">',
@@ -231,10 +235,5 @@ module.exports.register = function (Handlebars, options, params) {
     return new Handlebars.SafeString(Handlebars.compile(template)(context) + styles);
   };
 
-
-  for (var helper in exports) {
-    if (exports.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, exports[helper]);
-    }
-  }
+  return helpers;
 };
