@@ -25,11 +25,11 @@ module.exports = function (config) {
    * @return {String}         The pager, HTML.
    */
   helpers.pager = function(context, options) {
-    var ctx = config.context();
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<ul class="nav nav-pills nav-stacked">',
@@ -102,11 +102,11 @@ module.exports = function (config) {
    * @return {String}         The pager, HTML.
    */
   helpers.paginate = function(context, options) {
-    var ctx = config.context();
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<ul class="pager{{#if modifier}} {{modifier}}{{/if}}">',
@@ -167,11 +167,11 @@ module.exports = function (config) {
    * @return {String}         The pagination, HTML.
    */
   helpers.pagination = function(context, options) {
-    var ctx = config.context();
+    var ctx = _.omit(this, ['first', 'prev', 'next', 'last']);
 
     options = options || {};
     options.hash = options.hash || {};
-    context = _.extend({modifier: ''}, context, ctx, this, options.hash);
+    context = _.extend({modifier: ''}, context, ctx, options.hash);
 
     var template = [
       '<ul class="pagination{{#if modifier}} {{modifier}}{{/if}}">',
